@@ -7,7 +7,8 @@ namespace PlayingWithBenchmarkDotNet
   {
     public static void Main(string[] args)
     {
-      Summary summary = BenchmarkRunner.Run<BenchmarkMd5VsSha256>();
+      //Summary summary = BenchmarkRunner.Run<BenchmarkMd5VsSha256>();
+      Summary summary = BenchmarkRunner.Run<BenchmarkNameParsers>();
     }
   }
 }
