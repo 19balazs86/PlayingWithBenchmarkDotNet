@@ -1,5 +1,5 @@
-﻿using BenchmarkDotNet.Reports;
-using BenchmarkDotNet.Running;
+﻿using BenchmarkDotNet.Running;
+using PlayingWithBenchmarkDotNet.Benchmark;
 
 namespace PlayingWithBenchmarkDotNet
 {
@@ -7,8 +7,8 @@ namespace PlayingWithBenchmarkDotNet
   {
     public static void Main(string[] args)
     {
-      //Summary summary = BenchmarkRunner.Run<BenchmarkMd5VsSha256>();
-      Summary summary = BenchmarkRunner.Run<BenchmarkNameParsers>();
+      //var summary = BenchmarkRunner.Run<BenchmarkMd5VsSha256>();
+      var summary = BenchmarkRunner.Run<NameParsers>();
     }
   }
 }

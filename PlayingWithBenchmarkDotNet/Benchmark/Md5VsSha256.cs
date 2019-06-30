@@ -2,13 +2,13 @@
 using System.Security.Cryptography;
 using BenchmarkDotNet.Attributes;
 
-namespace PlayingWithBenchmarkDotNet
+namespace PlayingWithBenchmarkDotNet.Benchmark
 {
   [MemoryDiagnoser]
-  public class BenchmarkMd5VsSha256
+  public class Md5VsSha256
   {
     private readonly SHA256 _sha256 = SHA256.Create();
-    private readonly MD5 _md5       = MD5.Create();
+    private readonly MD5 _md5 = MD5.Create();
 
     private byte[] _data;
 

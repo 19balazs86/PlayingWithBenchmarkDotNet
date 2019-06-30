@@ -2,12 +2,12 @@
 using BenchmarkDotNet.Order;
 using PlayingWithBenchmarkDotNet.Code;
 
-namespace PlayingWithBenchmarkDotNet
+namespace PlayingWithBenchmarkDotNet.Benchmark
 {
   [RankColumn]
   [Orderer(SummaryOrderPolicy.FastestToSlowest)]
   [MemoryDiagnoser]
-  public class BenchmarkNameParsers
+  public class NameParsers
   {
     private const string _fullName = "Full Name Here";
 
