@@ -9,7 +9,8 @@ namespace PlayingWithBenchmarkDotNet
     {
       //var summary = BenchmarkRunner.Run<Md5VsSha256>();
       //var summary = BenchmarkRunner.Run<NameParsers>();
-      var summary = BenchmarkRunner.Run<Logging>();
+      //var summary = BenchmarkRunner.Run<Logging>();
+      var summary = BenchmarkRunner.Run<ReadJsonProperty>();
     }
   }
 }
