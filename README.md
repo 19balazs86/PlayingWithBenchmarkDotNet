@@ -14,3 +14,4 @@ This application is a sandbox to try out the BenchmarkDotNet. You can find usefu
   - [Techniques to avoid GC pressure and improve performance](https://michaelscodingspot.com/avoid-gc-pressure/).
   - [Best practices to find, fix, and avoid memory leaks](https://michaelscodingspot.com/find-fix-and-avoid-memory-leaks-in-c-net-8-best-practices/).
   - [Ways you can cause memory leaks](https://michaelscodingspot.com/ways-to-cause-memory-leaks-in-dotnet/).
+- [StringBuilder performance pitfalls](https://www.meziantou.net/stringbuilder-performance-pitfalls.htm) *(Meziantou blog)*.
