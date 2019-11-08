@@ -15,3 +15,7 @@ This application is a sandbox to try out the BenchmarkDotNet. You can find usefu
   - [Best practices to find, fix, and avoid memory leaks](https://michaelscodingspot.com/find-fix-and-avoid-memory-leaks-in-c-net-8-best-practices/).
   - [Ways you can cause memory leaks](https://michaelscodingspot.com/ways-to-cause-memory-leaks-in-dotnet/).
 - [StringBuilder performance pitfalls](https://www.meziantou.net/stringbuilder-performance-pitfalls.htm) *(Meziantou blog)*.
+- Memory, Span, Pipelines
+  - [Memory and Span usage guidelines](https://docs.microsoft.com/en-us/dotnet/standard/memory-and-spans/memory-t-usage-guidelines) *(Microsoft Docs)*
+  - [System.IO.Pipelines: High performance IO in .NET](https://devblogs.microsoft.com/dotnet/system-io-pipelines-high-performance-io-in-net) *(Follow David, Microsoft Devblogs)*
+  - [Exploring Spans and Pipelines](https://github.com/timiskhakov/timiskhakov.github.io/blob/master/posts/exploring-spans-and-pipelines.md) *(Tim Iskhakov, Github)*
