@@ -5,4 +5,5 @@ using PlayingWithBenchmarkDotNet.Benchmark;
 //_ = BenchmarkRunner.Run<NameParsers>();
 //_ = BenchmarkRunner.Run<Logging>();
 //_ = BenchmarkRunner.Run<ReadJsonProperty>();
-_ = BenchmarkRunner.Run<GuiderBenchmarks>();
+//_ = BenchmarkRunner.Run<GuiderBenchmarks>();
+_ = BenchmarkRunner.Run<BasicAuthenticationBenchmark>();
