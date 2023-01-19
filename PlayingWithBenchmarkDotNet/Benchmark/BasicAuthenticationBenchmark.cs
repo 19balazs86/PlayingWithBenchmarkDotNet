@@ -9,11 +9,19 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 [MemoryDiagnoser]
 public class BasicAuthenticationBenchmark
 {
-    private readonly string _authHeader = BasicAuthenticationHelper.TestAuthHeaderInput;
+    private string _authHeader;
+
+    [GlobalSetup]
+    public void Setup()
+    {
+        _authHeader = BasicAuthenticationHelper.GetTestAuthHeaderInput();
+    }
 
     [Benchmark(Baseline = true)]
-    public bool CheckBasicAuthorizationHeader() => BasicAuthenticationHelper.CheckBasicAuthorizationHeader(_authHeader);
+    public bool CheckBasicAuthorizationHeader()
+        => BasicAuthenticationHelper.CheckBasicAuthorizationHeader(_authHeader);
 
     [Benchmark]
-    public bool CheckBasicAuthorizationHeaderWithSpan() => BasicAuthenticationHelper.CheckBasicAuthorizationHeaderWithSpan(_authHeader);
+    public bool CheckBasicAuthorizationHeaderWithSpan()
+        => BasicAuthenticationHelper.CheckBasicAuthorizationHeaderWithSpan(_authHeader);
 }

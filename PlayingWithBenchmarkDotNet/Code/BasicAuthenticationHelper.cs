@@ -9,13 +9,11 @@ public static class BasicAuthenticationHelper
 
     private const string _basic = "Basic";
 
-    public static readonly string TestAuthHeaderInput;
-
-    static BasicAuthenticationHelper()
+    public static string GetTestAuthHeaderInput()
     {
         string token = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{ValidUsername}:{ValidPassword}"));
 
-        TestAuthHeaderInput = $"{_basic} {token}";
+        return $"{_basic} {token}";
     }
 
     public static bool CheckBasicAuthorizationHeader(string authHeader)
