@@ -7,3 +7,4 @@ using PlayingWithBenchmarkDotNet.Benchmark;
 //_ = BenchmarkRunner.Run<ReadJsonProperty>();
 //_ = BenchmarkRunner.Run<GuiderBenchmarks>();
 _ = BenchmarkRunner.Run<BasicAuthenticationBenchmark>();
+//_ = BenchmarkRunner.Run<Base64EncoderBenchmark>();
