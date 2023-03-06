@@ -1,5 +1,4 @@
 ﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Order;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -7,8 +6,8 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 
 // https://khalidabuhakmeh.com/speed-up-aspnet-core-json-apis-with-source-generators
 
-[RankColumn]
-[Orderer(SummaryOrderPolicy.SlowestToFastest)]
+//[RankColumn]
+//[Orderer(SummaryOrderPolicy.SlowestToFastest)]
 [MemoryDiagnoser]
 public class JSON_SourceGenerators
 {
@@ -16,7 +15,9 @@ public class JSON_SourceGenerators
 
     private static readonly JsonSerializerOptions _jsonSerializerOptions = new () { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 
-    [Benchmark(Baseline = true)]
+    private readonly string _serializedPerson = JsonSerializer.Serialize(_person);
+
+    [Benchmark]
     public string Serialize_Normal()
     {
         return JsonSerializer.Serialize(_person, _jsonSerializerOptions);
@@ -26,6 +27,18 @@ public class JSON_SourceGenerators
     public string Serialize_WithSourceGenerator()
     {
         return JsonSerializer.Serialize(_person, PersonSerializationContext.Default.Person);
+    }
+
+    [Benchmark]
+    public Person Deserialize_Normal()
+    {
+        return JsonSerializer.Deserialize<Person>(_serializedPerson);
+    }
+
+    [Benchmark]
+    public Person Deserialize_WithSourceGenerator()
+    {
+        return JsonSerializer.Deserialize(_serializedPerson, PersonSerializationContext.Default.Person);
     }
 }
 
