@@ -8,6 +8,7 @@ This repository is a sandbox to try out the [BenchmarkDotNet](https://github.com
   - 📓 [Base64 Encode a GUID](https://www.stevejgordon.co.uk/using-high-performance-dotnetcore-csharp-techniques-to-base64-encode-a-guid)
   - 📓 [An Introduction to Optimising Code Using Span](https://www.stevejgordon.co.uk/an-introduction-to-optimising-code-using-span-t)
   - 📓 [High-Performance Logging](https://www.stevejgordon.co.uk/high-performance-logging-in-net-core)
+    - [Compile-time logging source generation](https://learn.microsoft.com/en-us/dotnet/core/extensions/logger-message-generator) 📚
 - [Source generator for logging](https://dev.to/dgenezini/dont-box-your-logs-21a1) 📓*DanielGenezini*
 - [Improve memory allocation when creating HttpContent](https://hashnode.devindran.com/how-to-improve-memory-allocation-when-creating-httpcontent) 📓*Devindran Ramadass - Using the CommunityToolkit.HighPerformance package*
 - "Michael's coding spot" blog posts
