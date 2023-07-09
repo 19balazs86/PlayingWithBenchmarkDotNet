@@ -4,12 +4,11 @@ This repository is a sandbox to try out the [BenchmarkDotNet](https://github.com
 #### Resources
 - [Overview](https://benchmarkdotnet.org/articles/overview.html) 📓*Official, Guides, Features, Configs, Samples*.
 - Steve Gordon
-  - 📽️1h:35min [Writing High-Performance code](https://www.youtube.com/watch?v=NVWQRbqcXJ4) | [Blog post series](https://www.stevejgordon.co.uk/writing-high-performance-csharp-and-dotnet-code)
-  - 📓 [Base64 Encode a GUID](https://www.stevejgordon.co.uk/using-high-performance-dotnetcore-csharp-techniques-to-base64-encode-a-guid)
-  - 📓 [An Introduction to Optimising Code Using Span](https://www.stevejgordon.co.uk/an-introduction-to-optimising-code-using-span-t)
-  - 📓 [High-Performance Logging](https://www.stevejgordon.co.uk/high-performance-logging-in-net-core)
-    - [Compile-time logging source generation](https://learn.microsoft.com/en-us/dotnet/core/extensions/logger-message-generator) 📚
-- [Source generator for logging](https://dev.to/dgenezini/dont-box-your-logs-21a1) 📓*DanielGenezini*
+  - [Writing High-Performance code](https://www.youtube.com/watch?v=NVWQRbqcXJ4) 📽️1,5hour| [Blog post series](https://www.stevejgordon.co.uk/writing-high-performance-csharp-and-dotnet-code)
+  - [An Introduction to optimising code using Span](https://www.stevejgordon.co.uk/an-introduction-to-optimising-code-using-span-t) 📓
+- [Compile-time logging source generation](https://learn.microsoft.com/en-us/dotnet/core/extensions/logger-message-generator) 📚
+  - [Source generator for logging](https://dev.to/dgenezini/dont-box-your-logs-21a1) 📓*DanielGenezini*
+  - [High-Performance Logging](https://www.stevejgordon.co.uk/high-performance-logging-in-net-core) 📓Steve Gordon
 - [Improve memory allocation when creating HttpContent](https://hashnode.devindran.com/how-to-improve-memory-allocation-when-creating-httpcontent) 📓*Devindran Ramadass - Using the CommunityToolkit.HighPerformance package*
 - "Michael's coding spot" blog posts
   - [Best practices to find, fix, and avoid performance problems](https://michaelscodingspot.com/performance-problems-in-csharp-dotnet/)
