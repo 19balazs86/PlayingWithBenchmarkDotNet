@@ -7,7 +7,7 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 [RankColumn]
 [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 [MemoryDiagnoser]
-public class BasicAuthenticationBenchmark
+public class BasicAuthentication_Benchmark
 {
     private string _authHeader;
 

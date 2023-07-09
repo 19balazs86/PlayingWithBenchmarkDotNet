@@ -8,7 +8,7 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 // Nick Chapsas: https://youtu.be/lT5n2o3kuno
 
 [MemoryDiagnoser]
-public class ToImmutableArrayBenchmarks
+public class ToImmutableArray_Benchmarks
 {
     private static readonly Random _random = new Random(500);
 

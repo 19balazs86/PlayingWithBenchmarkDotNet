@@ -7,7 +7,7 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 [RankColumn]
 [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 [MemoryDiagnoser]
-public class NameParserBenchmarks
+public class NameParser_Benchmarks
 {
     private const string _fullName = "Full Name Here";
 

@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 namespace PlayingWithBenchmarkDotNet.Benchmark;
 
 [MemoryDiagnoser]
-public class Md5VsSha256Benchmarks
+public class Md5VsSha256_Benchmarks
 {
     private readonly SHA256 _sha256 = SHA256.Create();
     private readonly MD5 _md5 = MD5.Create();

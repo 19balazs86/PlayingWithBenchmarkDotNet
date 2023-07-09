@@ -8,7 +8,7 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 [RankColumn]
 [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 [MemoryDiagnoser]
-public class LoggingBenchmarks
+public class Logging_Benchmarks
 {
     private readonly ILogger _logger = NullLogger.Instance;
 

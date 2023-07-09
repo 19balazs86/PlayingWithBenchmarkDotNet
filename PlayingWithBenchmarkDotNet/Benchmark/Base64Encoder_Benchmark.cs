@@ -4,7 +4,7 @@ using PlayingWithBenchmarkDotNet.Code;
 namespace PlayingWithBenchmarkDotNet.Benchmark;
 
 [MemoryDiagnoser]
-public class Base64EncoderBenchmark
+public class Base64Encoder_Benchmark
 {
     private const string _input       = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private const string _encodedText = "QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODk=";

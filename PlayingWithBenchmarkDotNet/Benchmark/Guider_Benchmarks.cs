@@ -4,7 +4,7 @@ using PlayingWithBenchmarkDotNet.Code;
 namespace PlayingWithBenchmarkDotNet.Benchmark;
 
 [MemoryDiagnoser(displayGenColumns: false)]
-public class GuiderBenchmarks
+public class Guider_Benchmarks
 {
     private static readonly Guid _testIdAsGuid = Guid.Parse("4dfaaf49-1f03-41f8-b6cc-fd892c1d062f");
     private const string _testIdAsString       = "Sa-6TQMf_EG2zP2JLB0GLw";

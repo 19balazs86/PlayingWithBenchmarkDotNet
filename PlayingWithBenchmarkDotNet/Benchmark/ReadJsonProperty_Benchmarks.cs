@@ -3,7 +3,7 @@
 namespace PlayingWithBenchmarkDotNet.Benchmark;
 
 [MemoryDiagnoser]
-public class ReadJsonPropertyBenchmarks
+public class ReadJsonProperty_Benchmarks
 {
     private const string _jsonText = "{\"Glossary\":{\"Title\":\"example glossary\",\"GlossDiv\":{\"Title\":\"S\",\"GlossList\":{\"GlossEntry\":{\"ID\":\"SGML\",\"SortAs\":\"SGML\",\"GlossTerm\":\"Standard Generalized Markup Language\",\"Acronym\":\"SGML\",\"Abbrev\":\"ISO 8879:1986\",\"GlossDef\":{\"para\":\"A meta-markup language, used to create markup languages such as DocBook.\",\"GlossSeeAlso\":[\"GML\",\"XML\"]}}}}}}";
 
