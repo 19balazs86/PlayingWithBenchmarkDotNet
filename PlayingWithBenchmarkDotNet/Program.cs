@@ -8,4 +8,5 @@ using PlayingWithBenchmarkDotNet.Benchmark;
 //_ = BenchmarkRunner.Run<GuiderBenchmarks>();
 //_ = BenchmarkRunner.Run<BasicAuthenticationBenchmark>();
 //_ = BenchmarkRunner.Run<Base64EncoderBenchmark>();
+//_ = BenchmarkRunner.Run<ToImmutableArrayBenchmarks>();
 _ = BenchmarkRunner.Run<JSON_SourceGeneratorBenchmarks>();
