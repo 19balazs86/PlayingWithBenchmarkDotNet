@@ -9,7 +9,7 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 //[RankColumn]
 //[Orderer(SummaryOrderPolicy.SlowestToFastest)]
 [MemoryDiagnoser]
-public class JSON_SourceGenerators
+public class JSON_SourceGeneratorBenchmarks
 {
     private static readonly Person _person = new Person(1, "Person Name", 18, "Person's Address", null);
 

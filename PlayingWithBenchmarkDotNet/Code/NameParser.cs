@@ -1,35 +1,31 @@
-﻿using System;
-using System.Linq;
+﻿namespace PlayingWithBenchmarkDotNet.Code;
 
-namespace PlayingWithBenchmarkDotNet.Code
+public static class NameParser
 {
-  public class NameParser
-  {
-    public string GetLastName(string fullName)
+    public static string GetLastName(string fullName)
     {
-      string[] names = fullName.Split(" ");
+        string[] names = fullName.Split(" ");
 
-      string lastName = names.LastOrDefault();
+        string lastName = names.LastOrDefault();
 
-      return lastName ?? string.Empty;
+        return lastName ?? string.Empty;
     }
 
-    public string GetLastNameUsingSubstring(string fullName)
+    public static string GetLastNameUsingSubstring(string fullName)
     {
-      int lastSpaceIndex = fullName.LastIndexOf(" ", StringComparison.Ordinal);
+        int lastSpaceIndex = fullName.LastIndexOf(" ", StringComparison.Ordinal);
 
-      return lastSpaceIndex == -1
-        ? string.Empty
-        : fullName.Substring(lastSpaceIndex + 1);
+        return lastSpaceIndex == -1
+            ? string.Empty
+            : fullName.Substring(lastSpaceIndex + 1);
     }
 
-    public ReadOnlySpan<char> GetLastNameWithSpan(ReadOnlySpan<char> fullName)
+    public static ReadOnlySpan<char> GetLastNameWithSpan(ReadOnlySpan<char> fullName)
     {
-      int lastSpaceIndex = fullName.LastIndexOf(' ');
+        int lastSpaceIndex = fullName.LastIndexOf(' ');
 
-      return lastSpaceIndex == -1
-        ? ReadOnlySpan<char>.Empty
-        : fullName.Slice(lastSpaceIndex + 1);
+        return lastSpaceIndex == -1
+            ? ReadOnlySpan<char>.Empty
+            : fullName.Slice(lastSpaceIndex + 1);
     }
-  }
 }

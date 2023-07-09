@@ -1,12 +1,11 @@
-﻿using System;
+﻿using BenchmarkDotNet.Attributes;
 using System.Security.Cryptography;
-using BenchmarkDotNet.Attributes;
 
-namespace PlayingWithBenchmarkDotNet.Benchmark
+namespace PlayingWithBenchmarkDotNet.Benchmark;
+
+[MemoryDiagnoser]
+public class Md5VsSha256Benchmarks
 {
-  [MemoryDiagnoser]
-  public class Md5VsSha256
-  {
     private readonly SHA256 _sha256 = SHA256.Create();
     private readonly MD5 _md5 = MD5.Create();
 
@@ -18,8 +17,8 @@ namespace PlayingWithBenchmarkDotNet.Benchmark
     [GlobalSetup]
     public void Setup()
     {
-      _data = new byte[N];
-      new Random(42).NextBytes(_data);
+        _data = new byte[N];
+        new Random(42).NextBytes(_data);
     }
 
     [Benchmark]
@@ -27,5 +26,4 @@ namespace PlayingWithBenchmarkDotNet.Benchmark
 
     [Benchmark]
     public byte[] Md5() => _md5.ComputeHash(_data);
-  }
 }

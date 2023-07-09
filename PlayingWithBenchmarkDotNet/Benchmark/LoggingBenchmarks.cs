@@ -8,14 +8,14 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 [RankColumn]
 [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 [MemoryDiagnoser]
-public class Logging
+public class LoggingBenchmarks
 {
     private readonly ILogger _logger = NullLogger.Instance;
 
     private readonly Action<ILogger, string, int, Exception> _definedLogger = LoggerMessage.Define<string, int>(
         logLevel: LogLevel.Information,
         eventId: 1,
-        formatString: "Hello -> Name: '{name}', Age: {aage}");
+        formatString: "Hello -> Name: '{name}', Age: {age}");
 
     private const string _name = "My name";
     private const int _age     = 30;
