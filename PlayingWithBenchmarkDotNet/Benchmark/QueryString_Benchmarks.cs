@@ -65,7 +65,7 @@ public class QueryString_Benchmarks
     [Benchmark]
     public string String_Tokenizer_Decode()
     {
-        string value = String_Tokenizer();
+        string value = Better_String_Tokenizer();
 
         return HttpUtility.UrlDecode(value);
     }
