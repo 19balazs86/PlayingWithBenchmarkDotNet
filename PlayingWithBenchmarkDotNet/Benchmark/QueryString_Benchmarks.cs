@@ -8,10 +8,11 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 [MemoryDiagnoser]
 public class QueryString_Benchmarks
 {
-    private char[] _separatorsQuery = new char[] { '?', '&' };
-    private char[] _separatorsSplit = new char[] { '=' };
+    private readonly char[] _separatorsQuery = new char[] { '?', '&' };
+    private readonly char[] _separatorsSplit = new char[] { '=' };
 
-    private const string _queryKey = "key2";
+    private const string _queryKey1 = "key2";
+    private const string _queryKey2 = "key2="; // To make sure the StartsWith find the proper key, add the '=' at the end
 
     private static readonly Uri _url = new Uri("https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.webutilities.querystringenumerable?view=aspnetcore-7.0&key1=value1&key2=value2");
 
@@ -20,7 +21,7 @@ public class QueryString_Benchmarks
     {
         NameValueCollection query = HttpUtility.ParseQueryString(_url.Query);
 
-        return query.Get(_queryKey);
+        return query.Get(_queryKey1);
     }
 
     // StringTokenizer: https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.primitives.stringtokenizer
@@ -36,7 +37,7 @@ public class QueryString_Benchmarks
                 continue;
             }
 
-            if (segment.StartsWith(_queryKey, StringComparison.OrdinalIgnoreCase))
+            if (segment.StartsWith(_queryKey2, StringComparison.OrdinalIgnoreCase))
             {
                 return segment.Split(_separatorsSplit).Last().Value;
             }
