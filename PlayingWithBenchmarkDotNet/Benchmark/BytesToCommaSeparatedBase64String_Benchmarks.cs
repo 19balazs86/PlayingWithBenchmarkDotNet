@@ -82,7 +82,9 @@ public class BytesToCommaSeparatedBase64String_Benchmarks
             length += Base64.GetMaxEncodedToUtf8Length(message.Payload.Length);
         }
 
-        return string.Create(length, _messages, static (span, messages) =>
+        return string.Create(length, _messages, stringCreateSpanAction);
+
+        static void stringCreateSpanAction(Span<char> span, IEnumerable<Message> messages)
         {
             int offset = 0;
 
@@ -97,7 +99,7 @@ public class BytesToCommaSeparatedBase64String_Benchmarks
 
                 offset += charsWritten;
             }
-        });
+        }
     }
 }
 
