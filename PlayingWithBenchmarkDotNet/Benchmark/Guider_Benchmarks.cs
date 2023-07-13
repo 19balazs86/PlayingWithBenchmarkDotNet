@@ -3,6 +3,15 @@ using PlayingWithBenchmarkDotNet.Code;
 
 namespace PlayingWithBenchmarkDotNet.Benchmark;
 
+/*
+|              Method |      Mean |    Error |   StdDev | Allocated |
+|-------------------- |----------:|---------:|---------:|----------:|
+|    ToGuidFromString | 144.26 ns | 2.948 ns | 3.509 ns |     256 B |
+| ToGuidFromString_Op |  75.04 ns | 0.503 ns | 0.471 ns |         - |
+|    ToStringFromGuid | 153.55 ns | 1.143 ns | 0.955 ns |     328 B |
+| ToStringFromGuid_Op |  63.60 ns | 0.218 ns | 0.204 ns |      72 B |
+*/
+
 [MemoryDiagnoser(displayGenColumns: false)]
 public class Guider_Benchmarks
 {
