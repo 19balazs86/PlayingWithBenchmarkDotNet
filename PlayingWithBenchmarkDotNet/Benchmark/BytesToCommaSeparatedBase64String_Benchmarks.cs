@@ -1,6 +1,8 @@
 ﻿using BenchmarkDotNet.Attributes;
 using System.Buffers;
 using System.Buffers.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace PlayingWithBenchmarkDotNet.Benchmark;
 
@@ -10,12 +12,21 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 |  Convert_ToBase64String | 213.3 ns | 3.60 ns | 3.36 ns | 0.0937 |     392 B |
 | Using_ArrayBufferWriter | 192.2 ns | 0.47 ns | 0.40 ns | 0.1798 |     752 B |
 |     Using_String_Create | 162.1 ns | 0.89 ns | 0.83 ns | 0.0515 |     216 B |
+
+Extra example
+|                            Method |     Mean |   Error |  StdDev |   Gen0 | Allocated |
+|---------------------------------- |---------:|--------:|--------:|-------:|----------:|
+| Serialize_JSON_With_String_Create | 174.5 ns | 1.29 ns | 1.21 ns | 0.0515 |     216 B |
+|     Serialize_JSON_With_Converter | 332.7 ns | 1.40 ns | 1.17 ns | 0.0420 |     176 B |
+
 */
 
 [MemoryDiagnoser]
 public class BytesToCommaSeparatedBase64String_Benchmarks
 {
     private IReadOnlyList<Message> _messages;
+    private Request _request;
+    private JsonSerializerOptions _jsonSerializerOptions;
 
     [GlobalSetup]
     public void Setup()
@@ -27,7 +38,14 @@ public class BytesToCommaSeparatedBase64String_Benchmarks
             "Base64String process"u8.ToArray()
         };
 
-        _messages = bytes.Select(Message.Create).ToArray();
+        Message[] messagesArray = bytes.Select(Message.Create).ToArray();
+
+        _messages = messagesArray;
+
+        _request = new Request { Messages = messagesArray };
+
+        _jsonSerializerOptions = new JsonSerializerOptions();
+        _jsonSerializerOptions.Converters.Add(new MessagesJsonConverter());
     }
 
     [Benchmark]
@@ -102,8 +120,8 @@ public class BytesToCommaSeparatedBase64String_Benchmarks
         }
     }
 
-    // [Benchmark] // This is just an extra method
-    public string String_Create_JSON()
+    // [Benchmark] // This is just an extra example
+    public string Serialize_JSON_With_String_Create()
     {
         const string prefix = "{\"messages\": \"";
         const string suffix = "\"}";
@@ -136,15 +154,19 @@ public class BytesToCommaSeparatedBase64String_Benchmarks
                     span[offset++] = ',';
                 }
 
-                Message message = messages[i];
-
-                Convert.TryToBase64Chars(message.Payload, span[offset..], out int charsWritten);
+                Convert.TryToBase64Chars(messages[i].Payload, span[offset..], out int charsWritten);
 
                 offset += charsWritten;
             }
 
             suffix.CopyTo(span[offset..]);
         }
+    }
+
+    // [Benchmark] // This is just an extra example
+    public string Serialize_JSON_With_Converter()
+    {
+        return JsonSerializer.Serialize(_request, _jsonSerializerOptions);
     }
 }
 
@@ -158,5 +180,65 @@ public sealed class Message
         {
             Payload = payload
         };
+    }
+}
+
+public sealed class Request
+{
+    [JsonPropertyName("messages")]
+    public Message[] Messages { get; set; }
+}
+
+public sealed class MessagesJsonConverter : JsonConverter<Message[]>
+{
+    public override Message[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void Write(Utf8JsonWriter writer, Message[] messages, JsonSerializerOptions options)
+    {
+        if (messages.Length == 0)
+        {
+            writer.WriteStringValue("");
+
+            return;
+        }
+
+        int length = messages.Length - 1; // Commas
+
+        foreach (Message message in messages)
+        {
+            length += Base64.GetMaxEncodedToUtf8Length(message.Payload.Length);
+        }
+
+        var arrayPool = ArrayPool<byte>.Shared;
+
+        byte[] buffer   = arrayPool.Rent(length);
+        Span<byte> span = buffer.AsSpan();
+
+        const byte commyByte = (byte)',';
+
+        for (int i = 0; i < messages.Length; i++)
+        {
+            if (i > 0)
+            {
+                span[0] = commyByte;
+                span = span[1..];
+            }
+
+            OperationStatus status = Base64.EncodeToUtf8(messages[i].Payload, span, out _, out int bytesWritten);
+
+            if (status != OperationStatus.Done)
+            {
+                throw new InvalidOperationException("Wrong status");
+            }
+
+            span = span[bytesWritten..];
+        }
+
+        writer.WriteStringValue(buffer.AsSpan(0, length));
+
+        arrayPool.Return(buffer);
     }
 }
