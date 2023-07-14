@@ -75,7 +75,7 @@ public class BytesToCommaSeparatedBase64String_Benchmarks
     [Benchmark]
     public string Using_String_Create()
     {
-        int length = _messages.Count - 1;
+        int length = _messages.Count - 1; // Commas
 
         foreach (Message message in _messages)
         {
@@ -99,6 +99,51 @@ public class BytesToCommaSeparatedBase64String_Benchmarks
 
                 offset += charsWritten;
             }
+        }
+    }
+
+    // [Benchmark] // This is just an extra method
+    public string String_Create_JSON()
+    {
+        const string prefix = "{\"messages\": \"";
+        const string suffix = "\"}";
+
+        if (_messages.Count == 0)
+        {
+            return prefix + suffix;
+        }
+
+        int length = prefix.Length + suffix.Length +
+            _messages.Count - 1; // Commas
+
+        foreach (Message message in _messages)
+        {
+            length += Base64.GetMaxEncodedToUtf8Length(message.Payload.Length);
+        }
+
+        return string.Create(length, _messages, stringCreateSpanAction);
+
+        static void stringCreateSpanAction(Span<char> span, IReadOnlyList<Message> messages)
+        {
+            prefix.CopyTo(span);
+
+            int offset = prefix.Length;
+
+            for (int i = 0; i < messages.Count; i++)
+            {
+                if (i > 0)
+                {
+                    span[offset++] = ',';
+                }
+
+                Message message = messages[i];
+
+                Convert.TryToBase64Chars(message.Payload, span[offset..], out int charsWritten);
+
+                offset += charsWritten;
+            }
+
+            suffix.CopyTo(span[offset..]);
         }
     }
 }
