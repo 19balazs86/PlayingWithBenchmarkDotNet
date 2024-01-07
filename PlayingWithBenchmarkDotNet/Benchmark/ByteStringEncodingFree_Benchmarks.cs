@@ -3,6 +3,7 @@ using PlayingWithBenchmarkDotNet.Code;
 
 namespace PlayingWithBenchmarkDotNet.Benchmark;
 
+// Byte representation of string without Encoding
 // https://code-maze.com/csharp-consistent-byte-representation-of-strings-without-encoding/
 
 /*
@@ -22,26 +23,26 @@ public class ByteStringEncodingFree_Benchmarks
     private static readonly byte[] _bytes = ByteStringEncodingFreeUtils.GetBytesWithSpan(_text);
 
     [Benchmark]
-    public void GetBytes_Old()
+    public byte[] GetBytes_Old()
     {
-        ByteStringEncodingFreeUtils.GetBytesOld(_text);
+        return ByteStringEncodingFreeUtils.GetBytesOld(_text);
     }
 
     [Benchmark]
-    public void GetString_Old()
+    public string GetString_Old()
     {
-        ByteStringEncodingFreeUtils.GetStringOld(_bytes);
+        return ByteStringEncodingFreeUtils.GetStringOld(_bytes);
     }
 
     [Benchmark]
-    public void GetBytesWithSpan()
+    public byte[] GetBytesWithSpan()
     {
-        ByteStringEncodingFreeUtils.GetBytesWithSpan(_text);
+        return ByteStringEncodingFreeUtils.GetBytesWithSpan(_text);
     }
 
     [Benchmark]
-    public void GetStringWithSpan()
+    public string GetStringWithSpan()
     {
-        ByteStringEncodingFreeUtils.GetStringWithSpan(_bytes);
+        return ByteStringEncodingFreeUtils.GetStringWithSpan(_bytes);
     }
 }

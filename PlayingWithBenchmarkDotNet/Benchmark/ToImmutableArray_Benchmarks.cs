@@ -1,6 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using System.Collections.Immutable;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace PlayingWithBenchmarkDotNet.Benchmark;
 
@@ -8,10 +9,11 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 // Nick Chapsas: https://youtu.be/lT5n2o3kuno
 
 /*
-|                       Method | ItemCount |        Mean |     Error |    StdDev |   Gen0 | Allocated |
-|----------------------------- |---------- |------------:|----------:|----------:|-------:|----------:|
-|                       Normal |       100 | 112.5971 ns | 1.0058 ns | 0.8917 ns | 0.1969 |     824 B |
-| With_UnsafeAs_ImmutableArray |       100 |   0.0000 ns | 0.0000 ns | 0.0000 ns |      - |         - |
+| Method                           | ItemCount | Mean       | Allocated |
+|--------------------------------- |---------- |-----------:|----------:|
+| Normal                           | 100       | 96.1604 ns |     824 B |
+| With_UnsafeAs_ImmutableArray     | 100       |  0.0045 ns |         - |
+| With_ImmutableCollectionsMarshal | 100       |  0.0254 ns |         - |
 */
 
 [MemoryDiagnoser]
@@ -44,12 +46,11 @@ public class ToImmutableArray_Benchmarks
         return Unsafe.As<User[], ImmutableArray<User>>(ref _users);
     }
 
-    // Coming in .NET 8
-    //[Benchmark]
-    //public ImmutableArray<User> With_ImmutableCollectionsMarshal()
-    //{
-    //    return ImmutableCollectionsMarshal.AsImmutableArray(_users);
-    //}
+    [Benchmark]
+    public ImmutableArray<User> With_ImmutableCollectionsMarshal()
+    {
+        return ImmutableCollectionsMarshal.AsImmutableArray(_users);
+    }
 }
 
 public sealed class User
