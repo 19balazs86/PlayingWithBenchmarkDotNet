@@ -34,6 +34,7 @@ public class QueryString_Benchmarks
     }
 
     // QueryHelpers is in the namespace: Microsoft.AspNetCore.WebUtilities
+    // Append or Update Query string: https://code-maze.com/csharp-append-or-update-query-string-values
     //[Benchmark]
     //public string Old_QueryHelpers_ParseQuery_Get()
     //{
