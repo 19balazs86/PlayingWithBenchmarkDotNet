@@ -5,11 +5,20 @@ using System.Web;
 
 namespace PlayingWithBenchmarkDotNet.Benchmark;
 
+/*
+| Method                               | Mean     | Allocated |
+|------------------------------------- |---------:|----------:|
+| Old_HttpUtility_ParseQueryString_Get | 894.3 ns |    2048 B |
+| Old_QueryHelpers_ParseQuery_Get      | 347.1 ns |     448 B |
+| Better_String_Tokenizer_Get          | 148.7 ns |     144 B |
+| String_Tokenizer_Decode              | 211.8 ns |     312 B |
+*/
+
 [MemoryDiagnoser]
 public class QueryString_Benchmarks
 {
-    private readonly char[] _separatorsQuery = new char[] { '?', '&' };
-    private readonly char[] _separatorsSplit = new char[] { '=' };
+    private readonly char[] _separatorsQuery = ['?', '&'];
+    private readonly char[] _separatorsSplit = ['='];
 
     private const string _queryKey1 = "key2";
     private const string _queryKey2 = "key2="; // To make sure the StartsWith find the proper key, add the '=' at the end
@@ -23,6 +32,15 @@ public class QueryString_Benchmarks
 
         return query.Get(_queryKey1);
     }
+
+    // QueryHelpers is in the namespace: Microsoft.AspNetCore.WebUtilities
+    //[Benchmark]
+    //public string Old_QueryHelpers_ParseQuery_Get()
+    //{
+    //    var query = QueryHelpers.ParseQuery(_query);
+
+    //    return query[_queryKey1];
+    //}
 
     //[Benchmark] // Just uncomment it as the optimized version is currently unavailable
     //public string Old_HttpUtility_ParseQueryString_Remove()
@@ -91,7 +109,7 @@ public class QueryString_Benchmarks
     // https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.webutilities.querystringenumerable
     //public string Best_QueryString_Enumerable()
     //{
-    //    var queryMemoryKey = _queryKey.AsMemory();
+    //    var queryMemoryKey = _queryKey1.AsMemory();
 
     //    foreach (EncodedNameValuePair pair in new QueryStringEnumerable(_query))
     //    {
