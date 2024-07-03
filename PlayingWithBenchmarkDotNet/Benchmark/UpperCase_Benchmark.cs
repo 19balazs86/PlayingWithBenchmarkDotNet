@@ -17,6 +17,7 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 [RankColumn]
 [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 [MemoryDiagnoser(displayGenColumns: false)]
+[HideColumns("Error", "StdDev")]
 public class UpperCase_Benchmark
 {
     #region Fields
