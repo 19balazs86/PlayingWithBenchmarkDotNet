@@ -86,6 +86,9 @@ public class Base64UrlEncoderTests
     }
 }
 
+// Simplifying test data with Xunit.Combinatorial (I just keep this link here)
+// https://andrewlock.net/simplifying-theory-test-data-with-xunit-combinatorial
+
 // https://www.milanjovanovic.tech/blog/creating-data-driven-tests-with-xunit
 file sealed class EncodingData : TheoryData<string>
 {
