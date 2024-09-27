@@ -22,11 +22,7 @@ public static class ByteStringEncodingFreeUtils
     {
         ReadOnlySpan<byte> byteSpan = MemoryMarshal.AsBytes(charSpan);
 
-        var bytes = new byte[byteSpan.Length];
-
-        byteSpan.CopyTo(bytes);
-
-        return bytes;
+        return byteSpan.ToArray();
     }
 
     public static string GetStringWithSpan(ReadOnlySpan<byte> bytes)
