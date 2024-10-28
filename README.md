@@ -3,7 +3,7 @@ This repository is a sandbox to try out the [BenchmarkDotNet](https://github.com
 
 #### Resources
 - [Overview](https://benchmarkdotnet.org/articles/overview.html) 📓*Official, Guides, Features, Configs, Samples*.
-- [Scaling the outbox pattern using Postgres](https://www.milanjovanovic.tech/blog/scaling-the-outbox-pattern) 📓*Milan newsletter*
+- [Scaling the outbox pattern using Postgres](https://www.milanjovanovic.tech/blog/scaling-the-outbox-pattern), [Source code](https://github.com/m-jovanovic/outbox-scaling) 📓*Milan newsletter*
 - Steve Gordon
   - [Writing High-Performance code](https://youtu.be/2SXr48OYxbA) 📽️1 hour| [Blog post series](https://www.stevejgordon.co.uk/writing-high-performance-csharp-and-dotnet-code)
   - [An Introduction to optimising code using Span](https://www.stevejgordon.co.uk/an-introduction-to-optimising-code-using-span-t) 📓
