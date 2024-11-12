@@ -7,21 +7,24 @@ using System.Text.Json.Serialization;
 namespace PlayingWithBenchmarkDotNet.Benchmark;
 
 /*
-|                  Method |     Mean |   Error |  StdDev |   Gen0 | Allocated |
-|------------------------ |---------:|--------:|--------:|-------:|----------:|
-|  Convert_ToBase64String | 213.3 ns | 3.60 ns | 3.36 ns | 0.0937 |     392 B |
-| Using_ArrayBufferWriter | 192.2 ns | 0.47 ns | 0.40 ns | 0.1798 |     752 B |
-|     Using_String_Create | 162.1 ns | 0.89 ns | 0.83 ns | 0.0515 |     216 B |
+|                  Method |     Mean | Allocated |
+|------------------------ |---------:|----------:|
+|  Convert_ToBase64String | 213.3 ns |     392 B |
+| Using_ArrayBufferWriter | 192.2 ns |     752 B |
+|     Using_String_Create | 162.1 ns |     216 B |
 
 Extra example
-|                            Method |     Mean |   Error |  StdDev |   Gen0 | Allocated |
-|---------------------------------- |---------:|--------:|--------:|-------:|----------:|
-| Serialize_JSON_With_String_Create | 174.5 ns | 1.29 ns | 1.21 ns | 0.0515 |     216 B |
-|     Serialize_JSON_With_Converter | 332.7 ns | 1.40 ns | 1.17 ns | 0.0420 |     176 B |
-
+|                            Method |     Mean | Allocated |
+|---------------------------------- |---------:|----------:|
+| Serialize_JSON_With_String_Create | 174.5 ns |     216 B |
+|     Serialize_JSON_With_Converter | 332.7 ns |     176 B |
 */
 
+[ShortRunJob]
+// [RankColumn]
+// [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 [MemoryDiagnoser]
+[HideColumns("Error", "StdDev", "Gen0", "RatioSD")]
 public class BytesToCommaSeparatedBase64String_Benchmarks
 {
     private IReadOnlyList<Message> _messages;
@@ -31,12 +34,12 @@ public class BytesToCommaSeparatedBase64String_Benchmarks
     [GlobalSetup]
     public void Setup()
     {
-        var bytes = new[]
-        {
+        byte[][] bytes =
+        [
             "Optimize"u8.ToArray(),
             "the following"u8.ToArray(),
             "Base64String process"u8.ToArray()
-        };
+        ];
 
         Message[] messagesArray = bytes.Select(Message.Create).ToArray();
 

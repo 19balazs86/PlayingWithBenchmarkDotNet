@@ -4,14 +4,13 @@ using BenchmarkDotNet.Order;
 namespace PlayingWithBenchmarkDotNet.Benchmark;
 
 /* The idea of this topic coming from Dev Leader: https://youtu.be/_MLajy6jw9o
- *
- * | Method                     | Mean       | Ratio | Rank | Allocated |
- * |--------------------------- |-----------:|------:|-----:|----------:|
- * | Span                       |   303.0 us |  0.04 |    1 |         - |
- * | MemoryChunkExtention       |   320.6 us |  0.04 |    1 |      72 B |
- * | ArraySegment               |   691.1 us |  0.08 |    2 |         - |
- * | ArraySegmentChunkExtention |   710.3 us |  0.08 |    2 |      72 B |
- * | Chunk                      | 8,375.2 us |  1.00 |    3 | 4114310 B |
+| Method                     | Mean       | Ratio | Rank | Allocated |
+|--------------------------- |-----------:|------:|-----:|----------:|
+| Span                       |   303.0 us |  0.04 |    1 |         - |
+| MemoryChunkExtention       |   320.6 us |  0.04 |    1 |      72 B |
+| ArraySegment               |   691.1 us |  0.08 |    2 |         - |
+| ArraySegmentChunkExtention |   710.3 us |  0.08 |    2 |      72 B |
+| Chunk                      | 8,375.2 us |  1.00 |    3 | 4114310 B |
 */
 
 [ShortRunJob]

@@ -14,7 +14,11 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 | String_Tokenizer_Decode              | 211.8 ns |     312 B |
 */
 
+[ShortRunJob]
+// [RankColumn]
+// [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 [MemoryDiagnoser]
+[HideColumns("Error", "StdDev", "Gen0", "RatioSD")]
 public class QueryString_Benchmarks
 {
     private readonly char[] _separatorsQuery = ['?', '&'];

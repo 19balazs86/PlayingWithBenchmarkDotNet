@@ -12,7 +12,11 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 | ToStringFromGuid_Op |  63.60 ns | 0.218 ns | 0.204 ns |      72 B |
 */
 
-[MemoryDiagnoser(displayGenColumns: false)]
+[ShortRunJob]
+// [RankColumn]
+// [Orderer(SummaryOrderPolicy.FastestToSlowest)]
+[MemoryDiagnoser]
+[HideColumns("Error", "StdDev", "Gen0", "RatioSD")]
 public class Guider_Benchmarks
 {
     private static readonly Guid _testIdAsGuid = Guid.Parse("4dfaaf49-1f03-41f8-b6cc-fd892c1d062f");

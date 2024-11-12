@@ -6,22 +6,22 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 // Nick Chapsas video: https://youtu.be/q0VENoIXWso
 
 /*
- * | Method                | ExampleText     | Mean         | Allocated |
- * |---------------------- |-----------------|-------------:|----------:|
- * | IsBase64_SearchValues | +FO7x[zW        |     5.637 ns |         - |
- * | IsBase64_CharArray    | +FO7x[zW        |    44.547 ns |         - |
- * | IsBase64_Naive        | +FO7x[zW        |    66.513 ns |         - |
- * | IsBase64_SearchValues | Gm6N1(...)ZUkf5 |     8.586 ns |         - |
- * | IsBase64_CharArray    | Gm6N1(...)ZUkf5 |    72.708 ns |         - |
- * | IsBase64_Naive        | Gm6N1(...)ZUkf5 | 1,012.434 ns |         - |
- * | IsBase64_SearchValues | xlyUKFvk        |     5.247 ns |         - |
- * | IsBase64_CharArray    | xlyUKFvk        |    57.095 ns |         - |
- * | IsBase64_Naive        | xlyUKFvk        |    87.094 ns |         - |
- */
+| Method                | ExampleText     | Mean         | Allocated |
+|---------------------- |-----------------|-------------:|----------:|
+| IsBase64_SearchValues | +FO7x[zW        |     5.637 ns |         - |
+| IsBase64_CharArray    | +FO7x[zW        |    44.547 ns |         - |
+| IsBase64_Naive        | +FO7x[zW        |    66.513 ns |         - |
+| IsBase64_SearchValues | Gm6N1(...)ZUkf5 |     8.586 ns |         - |
+| IsBase64_CharArray    | Gm6N1(...)ZUkf5 |    72.708 ns |         - |
+| IsBase64_Naive        | Gm6N1(...)ZUkf5 | 1,012.434 ns |         - |
+| IsBase64_SearchValues | xlyUKFvk        |     5.247 ns |         - |
+| IsBase64_CharArray    | xlyUKFvk        |    57.095 ns |         - |
+| IsBase64_Naive        | xlyUKFvk        |    87.094 ns |         - |
+*/
 
 [ShortRunJob]
-//[RankColumn]
-//[Orderer(SummaryOrderPolicy.FastestToSlowest)]
+// [RankColumn]
+// [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 [MemoryDiagnoser]
 [HideColumns("Error", "StdDev", "Gen0", "RatioSD")]
 public class SearchValues_Benchmark

@@ -1,13 +1,23 @@
 ﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Order;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace PlayingWithBenchmarkDotNet.Benchmark;
 
-[RankColumn]
-[Orderer(SummaryOrderPolicy.FastestToSlowest)]
+/*
+| Method                  | Mean       | Ratio | Allocated | Alloc Ratio |
+|------------------------ |-----------:|------:|----------:|------------:|
+| LogStringInterpolation  | 68.6516 ns | 1.000 |      72 B |        1.00 |
+| LogWithMessageAndParams | 42.8291 ns | 0.624 |      64 B |        0.89 |
+| LogWithPredefined       |  1.1355 ns | 0.017 |         - |        0.00 |
+| LogWithSourceGenerator  |  0.3120 ns | 0.005 |         - |        0.00 |
+*/
+
+[ShortRunJob]
+// [RankColumn]
+// [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 [MemoryDiagnoser]
+[HideColumns("Error", "StdDev", "Gen0", "RatioSD")]
 public class Logging_Benchmarks
 {
     private readonly ILogger _logger = NullLogger.Instance;

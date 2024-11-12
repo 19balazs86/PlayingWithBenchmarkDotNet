@@ -16,6 +16,8 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 */
 
 [ShortRunJob]
+// [RankColumn]
+// [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 [MemoryDiagnoser]
 [HideColumns("Error", "StdDev", "Gen0", "RatioSD")]
 public class ByteStringEncodingFree_Benchmarks

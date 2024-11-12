@@ -3,7 +3,29 @@ using PlayingWithBenchmarkDotNet.Code;
 
 namespace PlayingWithBenchmarkDotNet.Benchmark;
 
+/*
+| Method                      | Mean      | Allocated |
+|---------------------------- |----------:|----------:|
+| Encode_Simplest             |  99.32 ns |     280 B |
+| Encode_Simple               |  85.12 ns |     192 B |
+| Encode_Complex              | 154.84 ns |     192 B |
+| Decode_Simplest             | 190.69 ns |     240 B |
+| Decode_Simple               | 120.37 ns |     152 B |
+| Decode_Complex              | 139.45 ns |     152 B |
+| Encode_UrlFriendly_Simplest | 189.30 ns |     472 B |
+| Encode_UrlFriendly_Simple   | 192.99 ns |     192 B |
+| Encode_UrlFriendly_Complex  | 203.99 ns |     192 B |
+| Decode_UrlFriendly_Simplest | 234.74 ns |     432 B |
+| Decode_UrlFriendly_Simple   | 215.82 ns |     152 B |
+| Decode_UrlFriendly_Complex  | 189.61 ns |     152 B |
+*/
+
+
+[ShortRunJob]
+// [RankColumn]
+// [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 [MemoryDiagnoser]
+[HideColumns("Error", "StdDev", "Gen0", "RatioSD")]
 public class Base64Encoder_Benchmark
 {
     private const string _input       = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
