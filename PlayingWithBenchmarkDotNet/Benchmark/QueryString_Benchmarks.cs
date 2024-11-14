@@ -11,6 +11,7 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 | Old_HttpUtility_ParseQueryString_Get | 894.3 ns |    2048 B |
 | Old_QueryHelpers_ParseQuery_Get      | 347.1 ns |     448 B |
 | Better_String_Tokenizer_Get          | 148.7 ns |     144 B |
+| Span_Split_Get                       | 37.89 ns |      40 B |
 | String_Tokenizer_Decode              | 211.8 ns |     312 B |
 */
 
@@ -73,6 +74,24 @@ public class QueryString_Benchmarks
             if (segment.StartsWith(_queryKey2, StringComparison.OrdinalIgnoreCase))
             {
                 return segment.Split(_separatorsSplit).Last().Value;
+            }
+        }
+
+        return string.Empty;
+    }
+
+    [Benchmark]
+    public string Span_Split_Get()
+    {
+        ReadOnlySpan<char> query = _query;
+
+        query = query.TrimStart('?');
+
+        foreach (Range range in query.Split('&'))
+        {
+            if (query[range].StartsWith(_queryKey2))
+            {
+                return query[range][_queryKey2.Length..].ToString();
             }
         }
 
