@@ -6,17 +6,19 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 // Nick Chapsas video: https://youtu.be/q0VENoIXWso
 
 /*
-| Method                | ExampleText     | Mean         | Allocated |
-|---------------------- |-----------------|-------------:|----------:|
-| IsBase64_SearchValues | +FO7x[zW        |     5.637 ns |         - |
-| IsBase64_CharArray    | +FO7x[zW        |    44.547 ns |         - |
-| IsBase64_Naive        | +FO7x[zW        |    66.513 ns |         - |
-| IsBase64_SearchValues | Gm6N1(...)ZUkf5 |     8.586 ns |         - |
-| IsBase64_CharArray    | Gm6N1(...)ZUkf5 |    72.708 ns |         - |
-| IsBase64_Naive        | Gm6N1(...)ZUkf5 | 1,012.434 ns |         - |
-| IsBase64_SearchValues | xlyUKFvk        |     5.247 ns |         - |
-| IsBase64_CharArray    | xlyUKFvk        |    57.095 ns |         - |
-| IsBase64_Naive        | xlyUKFvk        |    87.094 ns |         - |
+| Method                | ExampleText          | Mean       | Ratio | Allocated |
+|---------------------- |--------------------- |-----------:|------:|----------:|
+| IsBase64_Naive        | +FO7x[zW             |  58.360 ns |  1.00 |         - |
+| IsBase64_CharArray    | +FO7x[zW             |  34.148 ns |  0.59 |         - |
+| IsBase64_SearchValues | +FO7x[zW             |   4.432 ns |  0.08 |         - |
+|                       |                      |            |       |           |
+| IsBase64_Naive        | Gm6N1(...)ZUkf5 [64] | 923.094 ns | 1.000 |         - |
+| IsBase64_CharArray    | Gm6N1(...)ZUkf5 [64] |  74.164 ns | 0.080 |         - |
+| IsBase64_SearchValues | Gm6N1(...)ZUkf5 [64] |   7.223 ns | 0.008 |         - |
+|                       |                      |            |       |           |
+| IsBase64_Naive        | xlyUKFvk             |  76.554 ns |  1.00 |         - |
+| IsBase64_CharArray    | xlyUKFvk             |  42.544 ns |  0.56 |         - |
+| IsBase64_SearchValues | xlyUKFvk             |   3.873 ns |  0.05 |         - |
 */
 
 [ShortRunJob]
@@ -24,7 +26,7 @@ namespace PlayingWithBenchmarkDotNet.Benchmark;
 // [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 [MemoryDiagnoser]
 [HideColumns("Error", "StdDev", "Gen0", "RatioSD")]
-public class SearchValues_Benchmark
+public class SearchValues_Char_Benchmark
 {
     private const string _base64String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
@@ -39,19 +41,7 @@ public class SearchValues_Benchmark
     [Params("xlyUKFvk", "+FO7x[zW", "Gm6N1lqEynFb4JIiyVu6N8SrkpmZE7Ye3v3L2fUO6J5X6kJ1OpJd55iGyGHZUkf5")]
     public string ExampleText { get; set; }
 
-    [Benchmark]
-    public bool IsBase64_SearchValues()
-    {
-        return ExampleText.AsSpan().IndexOfAnyExcept(_base64SearchValues) == -1;
-    }
-
-    [Benchmark]
-    public bool IsBase64_CharArray()
-    {
-        return ExampleText.AsSpan().IndexOfAnyExcept(_base64CharArray) == -1;
-    }
-
-    [Benchmark]
+    [Benchmark(Baseline = true)]
     public bool IsBase64_Naive()
     {
         int length = ExampleText.Length;
@@ -67,5 +57,17 @@ public class SearchValues_Benchmark
         }
 
         return true;
+    }
+
+    [Benchmark]
+    public bool IsBase64_CharArray()
+    {
+        return ExampleText.AsSpan().IndexOfAnyExcept(_base64CharArray) == -1;
+    }
+
+    [Benchmark]
+    public bool IsBase64_SearchValues()
+    {
+        return ExampleText.AsSpan().IndexOfAnyExcept(_base64SearchValues) == -1;
     }
 }

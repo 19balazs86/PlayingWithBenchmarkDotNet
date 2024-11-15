@@ -11,4 +11,5 @@ using PlayingWithBenchmarkDotNet.Benchmark;
 // _ = BenchmarkRunner.Run<JSON_SourceGenerator_Benchmarks>();
 // _ = BenchmarkRunner.Run<ByteStringEncodingFree_Benchmarks>();
 // _ = BenchmarkRunner.Run<ArrayBatching_Benchmark>();
-_ = BenchmarkRunner.Run<SearchValues_Benchmark>();
+// _ = BenchmarkRunner.Run<SearchValues_Char_Benchmark>();
+_ = BenchmarkRunner.Run<SearchValues_String_Contains_Benchmark>();

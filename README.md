@@ -6,6 +6,7 @@
 ## Resources
 
 - [Official](https://benchmarkdotnet.org/articles/overview.html) 📓*Guides, Features, Configs, Samples* | [BenchmarkDotNet](https://github.com/dotnet/BenchmarkDotNet) 👤*dotnet*
+- [Performance Improvements in .NET 9](https://youtu.be/aLQpnpSxosg) 📽️*.NET Conf 2024 - (Regex.EnumerateMatches and EnumerateSplits, AlternateLookup, SearchValues)*
 - [Writing High-Performance code](https://youtu.be/2SXr48OYxbA) 📽️*1 hour - Steve Gordon* | [Blog post series](https://www.stevejgordon.co.uk/writing-high-performance-csharp-and-dotnet-code)
 - [Compile-time logging source generation](https://learn.microsoft.com/en-us/dotnet/core/extensions/logger-message-generator) 📚
   - [Source generator for logging](https://dev.to/dgenezini/dont-box-your-logs-21a1) 📓*DanielGenezini*
