@@ -19,6 +19,11 @@ public static class Base64UrlEncoder
         return Convert.ToBase64String(Encoding.UTF8.GetBytes(input));
     }
 
+    public static string Encode_Simplest_New(string input)
+    {
+        return Base64Url.EncodeToString(Encoding.UTF8.GetBytes(input));
+    }
+
     public static string Encode_Simple(ReadOnlySpan<char> input)
     {
         Span<byte> inputAsUTF8Bytes = stackalloc byte[Encoding.UTF8.GetByteCount(input)];
