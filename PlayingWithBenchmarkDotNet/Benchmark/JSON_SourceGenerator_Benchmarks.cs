@@ -60,4 +60,4 @@ public record Person(int Id, string Name, int Age, string Address, string NullSt
     DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
     PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]
 [JsonSerializable(typeof(Person))]
-public partial class PersonSerializationContext : JsonSerializerContext { }
+public sealed partial class PersonSerializationContext : JsonSerializerContext;
